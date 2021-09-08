@@ -1,0 +1,35 @@
+{
+  "name": "vue3-countdown",
+  "version": "1.0.0",
+  "description": "A simple countdown component form v3.x.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuanrin/vue3-countdown.git"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "countdown",
+    "component"
+  ],
+  "author": "wuanrin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wuanrin/vue3-countdown/issues"
+  },
+  "homepage": "https://github.com/wuanrin/vue3-countdown#readme",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^8.2.5",
+    "rollup": "^2.56.3",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.2"
+  },
+  "peerDependencies": {
+    "vue": "3.0.0"
+  }
+}
