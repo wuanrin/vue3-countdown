@@ -35,6 +35,7 @@ export function resolveCountdown(
   format = 'HH:mm:ss'
 ): ResolvedCountdown {
   const res: ResolvedCountdown = {}
+  // Not beginning with ~
   const thisUnits = units.filter(
     unit => (
       format.indexOf(unit.symbol) > -1 &&
@@ -75,8 +76,9 @@ export function formatCountdown (
   const keys = Object.keys(time).sort((a, b) => b.length - a.length)
   let rs = format
   keys.forEach(key => {
-    const regex = new RegExp('(?<!~)' + key, 'g')
-    rs = rs.replace(regex, time[key] as string)
+    if (rs.indexOf(key) > -1 && rs.indexOf('~' + key) < 0) {
+      rs = rs.replace(key, time[key] as string)
+    }
   })
 
   // Escape
