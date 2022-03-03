@@ -87,7 +87,7 @@ export default {
 <countdown :time="60 * 1000" format="ss" />
 ```
 
-### Even
+### Event
 
 ```html
 <countdown
@@ -103,7 +103,7 @@ export default {
   methods: {
     handleChange ({ currentTime, resolved, formatted }) {
       console.log(currentTime, resolved, formatted)
-    
+    },
     handleFinish () {
       console.log('finished')
     }
@@ -134,7 +134,8 @@ export default {
 | s      | Second               |
 | ss     | Second, leading zero |
 | S      | Millisecond, 1-digit |
-| SS     | Millisecond, 2-digit 
+| SS     | Millisecond, 2-digit |
+
 If you don't want to convert a unit charactor you can prefixing the character `~` before the unit character.
 
 For example, format prop `DD Day HH:mm:ss` will be converted to `01 1ay HH:mm:ss`, the word `Day` is incorrectly converted to `1ay`.
