@@ -73,7 +73,7 @@ export default {
       this.$refs.countdown.start()
     },
     pause() {
-      this.$rs.countdown.stop()
+      this.$refs.countdown.stop()
     },
     reset() {
       this.$refs.countdown.reset()
