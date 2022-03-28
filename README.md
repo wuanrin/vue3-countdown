@@ -34,6 +34,8 @@ export default defineComponent({
 />
 ```
 
+> `~` is an escape character to prevent the character `D` in `Day` from being escaped to a date.
+
 ### Custom Style
 
 ```html
@@ -136,10 +138,9 @@ export default {
 | S      | Millisecond, 1-digit |
 | SS     | Millisecond, 2-digit |
 
-If you don't want to convert a unit charactor you can prefixing the character `~` before the unit character.
+You can prefixing the character `~` before the unit character if you don't want to convert a unit charactor.
 
-For example, format prop `DD Day HH:mm:ss` will be converted to `01 1ay HH:mm:ss`, the word `Day` is incorrectly converted to `1ay`.
-Using `DD ~DaHH:mm:ss` can solve this problem.
+For example, format prop `DD Day HH:mm:ss` will be converted to `01 1ay HH:mm:ss`, the word `Day` is incorrectly converted to `1ay`, using `DD ~Day HH:mm:ss` to avoid this problem.
 
 ### Events
 
