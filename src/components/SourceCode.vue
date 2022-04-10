@@ -27,8 +27,8 @@ export default {
   }
 }
 </script>
-<style>
-@import url("highlight.js/styles/atom-one-light.css");
+<style lang="less">
+@import url("highlight.js/styles/github.css");
 
 .source-code {
   display: block;
@@ -38,5 +38,9 @@ export default {
   font-size: 14px;
   line-height: 1.45;
   background-color: #f6f8fa;
+
+  code {
+    font-family: 'Courier New';
+  }
 }
 </style>
