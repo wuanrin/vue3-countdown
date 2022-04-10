@@ -59,7 +59,6 @@ export default defineComponent({
       const { restTime, now } = config
       const interval = Date.now() - now
       const target = restTime > interval ? restTime - interval : 0
-
       const thisResolved = resolveCountdown(target, props.format)
       const thisFormatted = formatCountdown(thisResolved, props.format)
       if (thisFormatted !== formatted.value) {

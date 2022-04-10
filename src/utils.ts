@@ -17,8 +17,33 @@ const units: Array<Unit> = [
   { symbol: 'S', value: 100 }
 ]
 
-function replaceAll(source: string, search: string, replace: string): string {
-  return source.split(search).join(replace)
+function replaceAll(source: string, search: string, replace: string | number): string {
+  if (source.indexOf('~') < 0) {
+    return source.replace(new RegExp(search, 'g'), String(replace))
+  }
+  const searchLength = search.length
+  const res = []
+  while (true) {
+    const index = source.indexOf(search)
+    if (index > -1) {
+      if (index > 0 && source.charAt(index - 1) === '~') {
+        res.push(
+          source
+            .substring(0, index + searchLength)
+            // .replace(new RegExp(`~(${search})`, 'g'), '<' + search + '>')
+            // .split(`~${search}`).join(search)
+        )
+      } else {
+        res.push(source.substring(0, index))
+        res.push(replace)
+      }
+      source = source.substring(index + searchLength)
+    } else {
+      res.push(source)
+      break
+    }
+  }
+  return res.join('')
 }
 
 // Decompose time into time units
@@ -27,12 +52,11 @@ export function resolveCountdown(
   format = 'HH:mm:ss'
 ): ResolvedCountdown {
   const res: ResolvedCountdown = {}
+  if (format.indexOf('~') > -1) {
+    format = format.replace(/~[DHmsS]/g, '')
+  }
   // Not beginning with ~
-  const thisUnits = units.filter(unit => {
-    const index = format.indexOf(unit.symbol)
-    const escapeIndex = format.indexOf('~' + unit.symbol)
-    return index > -1 && (escapeIndex < 0 || escapeIndex > -1 && escapeIndex !== index - 1)
-  })
+  const thisUnits = units.filter(unit => format.indexOf(unit.symbol) > -1)
   for (let i = 0, l = thisUnits.length; i < l; i++) {
     const { symbol, value } = thisUnits[i]
 
@@ -67,14 +91,7 @@ export function formatCountdown (
   const keys = Object.keys(time).sort((a, b) => b.length - a.length)
   let rs = format
   keys.forEach(key => {
-    const index = rs.indexOf(key)
-    const escapeIndex = rs.indexOf('~' + key)
-    if (index > -1 && (escapeIndex < 0 || escapeIndex > -1 && escapeIndex !== index - 1)) {
-      rs = replaceAll(rs, key, time[key] as string)
-    }
+    rs = replaceAll(rs, key, time[key] as string)
   })
-
-  // Escape
-  rs = rs.replace(/~([DHmsS])/g, '$1')
   return rs
 }
