@@ -34,6 +34,8 @@ export default defineComponent({
 />
 ```
 
+> The `~` in `~Day` is a escape character.
+
 ### Custom Style
 
 ```html
@@ -41,7 +43,7 @@ export default defineComponent({
   :time="30 * 60 * 60 * 1000"
   format="HH:mm:ss"
 >
-  <template v-slot="{ resolved }">
+  <template #="{ resolved }">
     <span class="countdown-item">{{ resolved.HH }}</span> :
     <span class="countdown-item">{{ resolved.mm }}</span> :
     <span class="countdown-item">{{ resolved.ss }}</span>
@@ -52,42 +54,78 @@ export default defineComponent({
 ### Masual Control
 
 ```html
-<div>
-  <countdown
-    ref="countdown"
-    :time="30 * 60 * 60 * 1000"
-    :auto-start="false"
-  />
-  <div class="control-buttons">
-    <button @click="start">Start</button>
-    <button @click="pause">Pause</button>
-    <button @click="reset">Reset</button>
-  </div>
+<countdown
+  ref="countdown"
+  :time="30 * 60 * 60 * 1000"
+  :auto-start="false"
+/>
+<div class="control-buttons">
+  <Button @click="start">Start</Button>
+  <Button @click="pause">Pause</Button>
+  <Button @click="reset">Reset</Button>
 </div>
 ```
 
 ```js
+import { ref } from 'vue'
 export default {
-  methods: {
-    start() {
-      this.$refs.countdown.start()
-    },
-    pause() {
-      this.$rs.countdown.stop()
-    },
-    reset() {
-      this.$refs.countdown.reset()
+  setup () {
+    const countdown = ref()
+    const start = () => countdown.value.start()
+    const pause = () => countdown.value.stop()
+    const reset = () => countdown.value.reset()
+
+    return {
+      countdown,
+      start,
+      pause,
+      reset
     }
   }
+}
 ```
 
 ### Second Count Down
 
 ```html
-<countdown :time="60 * 1000" format="ss" />
+<Button :disabled="inCountdown" @click="handleClick">
+  <template v-if="!inCountdown">Start</template>
+  <countdown
+    v-else
+    ref="countdown"
+    :time="60 * 1000"
+    :auto-start="false"
+    format="ss"
+    @finish="inCountdown = false"
+  >
+    <template #="{ formatted }">{{ formatted }}s</template>
+  </countdown>
+</Button>
 ```
 
-### Event
+```js
+import { ref, nextTick } from 'vue'
+export default {
+  setup () {
+    const countdown = ref()
+    const inCountdown = ref(false)
+    const handleClick = () => {
+      inCountdown.value = true
+      nextTick(() => {
+        countdown.value.reset()
+        countdown.value.start()
+      })
+    }
+    return {
+      countdown,
+      inCountdown,
+      handleClick
+    }
+  }
+}
+```
+
+### Events
 
 ```html
 <countdown
@@ -100,12 +138,16 @@ export default {
 
 ```js
 export default {
-  methods: {
-    handleChange ({ currentTime, resolved, formatted }) {
+  setup () {
+    const handleChange = ({ currentTime, resolved, formatted }) => {
       console.log(currentTime, resolved, formatted)
-    },
-    handleFinish () {
+    }
+    const handleFinish = () => {
       console.log('finished')
+    }
+    return {
+      handleChange,
+      handleFinish
     }
   }
 }
