@@ -39,7 +39,7 @@ export default defineComponent({
 
     // computed
     const stepInterval = computed(
-      () => /s/i.test(props.format) ? 30 : 1000
+      () => /s/i.test(props.format) ? 300 : 1000
     )
     const formatted = computed(
       () => formatCountdown(resolved.value, props.format)

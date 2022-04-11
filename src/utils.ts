@@ -18,32 +18,14 @@ const units: Array<Unit> = [
 ]
 
 function replaceAll(source: string, search: string, replace: string | number): string {
-  if (source.indexOf('~') < 0) {
-    return source.replace(new RegExp(search, 'g'), String(replace))
+  const escapeStr = '~' + search
+  if (source.indexOf(escapeStr) > -1) {
+    return source
+      .split(escapeStr)
+      .map(part => replaceAll(part, search, replace))
+      .join(escapeStr)
   }
-  const searchLength = search.length
-  const res = []
-  while (true) {
-    const index = source.indexOf(search)
-    if (index > -1) {
-      if (index > 0 && source.charAt(index - 1) === '~') {
-        res.push(
-          source
-            .substring(0, index + searchLength)
-            // .replace(new RegExp(`~(${search})`, 'g'), '<' + search + '>')
-            // .split(`~${search}`).join(search)
-        )
-      } else {
-        res.push(source.substring(0, index))
-        res.push(replace)
-      }
-      source = source.substring(index + searchLength)
-    } else {
-      res.push(source)
-      break
-    }
-  }
-  return res.join('')
+  return source.replace(new RegExp(search, 'g'), String(replace))
 }
 
 // Decompose time into time units
@@ -93,5 +75,10 @@ export function formatCountdown (
   keys.forEach(key => {
     rs = replaceAll(rs, key, time[key] as string)
   })
+
+  // Remove escape char
+  if (rs.indexOf('~') > -1) {
+    rs = rs.replace(/~([DHmsS])/g, '$1')
+  }
   return rs
 }
