@@ -97,11 +97,9 @@ export default {
     ref="countdown"
     :time="60 * 1000"
     :auto-start="false"
-    format="ss"
+    format="ss~s"
     @finish="inCountdown = false"
-  >
-    <template #="{ formatted }">{{ formatted }}s</template>
-  </countdown>
+  />
 </Button>
 ```
 
