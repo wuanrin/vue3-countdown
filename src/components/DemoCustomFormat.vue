@@ -3,12 +3,7 @@
     <countdown
       :time="30 * 60 * 60 * 1000"
       format="DD ~Day, HH:mm:ss"
-    >
-      <template #="{ formatted, resolved }">
-        <div>{{ formatted }}</div>
-        <div>{{ resolved }}</div>
-      </template>
-    </countdown>
+    />
     <template #code>
       <source-code lang="xml" :code="code" />
     </template>
