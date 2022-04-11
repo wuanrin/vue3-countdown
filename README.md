@@ -2,6 +2,8 @@
 
 A simple countdown component for Vue3.x.
 
+[Live Demo](https://wuanrin.github.io/vue3-countdown/)
+
 ## Installation
 
 ```
