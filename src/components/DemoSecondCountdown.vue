@@ -11,11 +11,9 @@
         ref="countdown"
         :time="60 * 1000"
         :auto-start="false"
-        format="ss"
+        format="ss~s"
         @finish="inCountdown = false"
-      >
-        <template #="{ formatted }">{{ formatted }}s</template>
-      </countdown>
+      />
     </AppButton>
     <template #code>
       <source-code lang="xml" :code="templateCode" />
@@ -36,11 +34,9 @@ const templateCode = `<Button
     ref="countdown"
     :time="60 * 1000"
     :auto-start="false"
-    format="ss"
+    format="ss~s"
     @finish="inCountdown = false"
-  >
-    <template #="{ formatted }">{{ formatted }}s</template>
-  </countdown>
+  />
 </Button>`
 const scriptCode = `import { ref, nextTick } from 'vue'
 export default {
