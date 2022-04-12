@@ -4,7 +4,8 @@
   "description": "A simple countdown component form v3.x.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rollup -c",
+    "dev": "rollup -c rollup.config.js -w",
+    "build": "rollup -c rollup.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

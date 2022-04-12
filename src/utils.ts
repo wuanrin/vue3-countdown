@@ -7,18 +7,6 @@ interface Unit {
   value: number
 }
 
-// interface ResolvedCountdown {
-//   D?: number
-//   DD?: string
-//   H?: number
-//   HH?: string
-//   m?: number
-//   mm?: string
-//   s?: number
-//   ss?: string
-//   S?: number
-//   SS?: string
-// }
 type ResolvedCountdown = Record<string, string | number>
 
 const units: Array<Unit> = [
@@ -29,19 +17,27 @@ const units: Array<Unit> = [
   { symbol: 'S', value: 100 }
 ]
 
+function replaceAll(source: string, search: string, replace: string | number): string {
+  const escapeStr = '~' + search
+  if (source.indexOf(escapeStr) > -1) {
+    return source
+      .split(escapeStr)
+      .map(part => replaceAll(part, search, replace))
+      .join(escapeStr)
+  }
+  return source.replace(new RegExp(search, 'g'), String(replace))
+}
+
 // Decompose time into time units
 export function resolveCountdown(
   countdown: number,
   format = 'HH:mm:ss'
 ): ResolvedCountdown {
   const res: ResolvedCountdown = {}
-  // Not beginning with ~
-  const thisUnits = units.filter(
-    unit => (
-      format.indexOf(unit.symbol) > -1 &&
-      format.indexOf('~' + unit.symbol) < 0
-    )
-  )
+  if (format.indexOf('~') > -1) {
+    format = format.replace(/~[DHmsS]/g, '')
+  }
+  const thisUnits = units.filter(unit => format.indexOf(unit.symbol) > -1)
   for (let i = 0, l = thisUnits.length; i < l; i++) {
     const { symbol, value } = thisUnits[i]
 
@@ -76,12 +72,12 @@ export function formatCountdown (
   const keys = Object.keys(time).sort((a, b) => b.length - a.length)
   let rs = format
   keys.forEach(key => {
-    if (rs.indexOf(key) > -1 && rs.indexOf('~' + key) < 0) {
-      rs = rs.replace(key, time[key] as string)
-    }
+    rs = replaceAll(rs, key, time[key] as string)
   })
 
-  // Escape
-  rs = rs.replace(/~([DHmsS])/g, '$1')
+  // Remove escape char
+  if (rs.indexOf('~') > -1) {
+    rs = rs.replace(/~([DHmsS])/g, '$1')
+  }
   return rs
 }
