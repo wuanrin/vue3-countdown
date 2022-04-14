@@ -40,7 +40,7 @@ export default {
   background-color: #f6f8fa;
 
   code {
-    font-family: 'Courier New';
+    font-family: 'ui-monospace','SFMono-Regular','SF Mono',Menlo,Consolas,'Liberation Mono',monospace;
   }
 }
 </style>
