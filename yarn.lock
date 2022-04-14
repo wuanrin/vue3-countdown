@@ -6217,10 +6217,10 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npmmirror.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue3-countdown@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/vue3-countdown/-/vue3-countdown-1.0.2.tgz#327e1af335c7cb2131449ee06ff2fa6cfd07f4e9"
-  integrity sha512-BgEOcwst89Pzbxfi+g55OKNNa/8NSJdKOroa5/z029sH1cx89NOi+Q/aXedXoy0KR6bGAN5ZiuEChSzyUcNqyw==
+vue3-countdown@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/vue3-countdown/-/vue3-countdown-1.0.4.tgz#46046cf0799341c247b5b003d110e4ba512c2d6b"
+  integrity sha512-pZM7x033n0pPiJWt6WItakc7ipWR3LkGnSeveEuriXsbz/6Tyug2QRlxy82pCLnIhtO7+V4znlTdktpUv4GKuw==
 
 vue@^3.2.13:
   version "3.2.31"

@@ -11,7 +11,7 @@
     "core-js": "^3.8.3",
     "highlight.js": "^11.5.0",
     "vue": "^3.2.13",
-    "vue3-countdown": "^1.0.2"
+    "vue3-countdown": "^1.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
