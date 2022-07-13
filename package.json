@@ -1,8 +1,10 @@
 {
   "name": "vue3-countdown",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A simple countdown component for Vue3.x.",
-  "main": "dist/index.js",
+  "main": "dist/vue3-countdown.js",
+  "module": "dist/vue3-countdown.esm.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "dev": "rollup -c rollup.config.js -w",
     "build": "rollup -c rollup.config.js",
@@ -25,10 +27,11 @@
   },
   "homepage": "https://github.com/wuanrin/vue3-countdown#readme",
   "devDependencies": {
-    "@rollup/plugin-typescript": "^8.2.5",
     "rollup": "^2.56.3",
+    "rollup-plugin-typescript2": "^0.32.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.2",
+    "vue": "^3.0.0"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
