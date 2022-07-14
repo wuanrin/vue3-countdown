@@ -1,6 +1,6 @@
 {
   "name": "vue3-countdown",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A simple countdown component for Vue3.x.",
   "main": "dist/vue3-countdown.js",
   "module": "dist/vue3-countdown.esm.js",
